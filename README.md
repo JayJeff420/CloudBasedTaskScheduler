@@ -18,7 +18,7 @@ Ideal for:
  **Task Management API**
 - Create, update, delete, and list scheduled tasks via REST API
 
-✅ **Retry & Dead Letter Handling**
+ **Retry & Dead Letter Handling**
 - Automatic retry with configurable retry count and delay
 - Failed tasks beyond limit are moved to `dead_letters` table
 
