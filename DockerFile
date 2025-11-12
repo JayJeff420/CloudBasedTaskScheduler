@@ -1,0 +1,30 @@
+# Dockerfile
+FROM python:3.11-slim
+
+# minimal deps for running Flask + APScheduler + SQLAlchemy + Prometheus
+ENV PYTHONUNBUFFERED=1 \
+    POETRY_VIRTUALENVS_CREATE=false
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    libpq-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src/app
+
+# copy requirements if you maintain one, otherwise install minimal libs
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# copy code
+COPY . .
+
+# ensure app listens on 0.0.0.0 and use PORT env var
+ENV FLASK_RUN_HOST=0.0.0.0 \
+    FLASK_RUN_PORT=5000
+
+EXPOSE 5000
+
+# default command
+CMD ["python", "app.py"]

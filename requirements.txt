@@ -1,0 +1,6 @@
+flask
+apscheduler
+prometheus_client
+sqlalchemy
+psycopg2-binary
+pytest
